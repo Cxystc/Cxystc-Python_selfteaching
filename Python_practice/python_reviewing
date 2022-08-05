@@ -6,3 +6,11 @@ AgeIsMine = 123
 age_is_mine = 123
 #常量
 AGE_IS_MINE = 123
+
+a = 1 
+b = 1 
+c = a
+print (a == b)
+print (a is b)
+print (a == c)
+print (a is c)
