@@ -1,0 +1,11 @@
+# 赋值语句
+from curses import ACS_GEQUAL
+
+
+variate_ = 123
+
+#命名规范变量第一个字符不能是数字
+AgeIsMine = 123
+age_is_mine = 123
+#常量
+AGE_IS_MINE = 123
