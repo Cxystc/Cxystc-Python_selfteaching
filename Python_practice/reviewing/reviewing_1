@@ -40,3 +40,4 @@ print(x,y,z)
 info = {'name': 'nick', 'age': 18}
 x, y = info
 print(x, y)
+
