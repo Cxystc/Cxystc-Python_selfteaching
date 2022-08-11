@@ -1,0 +1,29 @@
+'''Author : Erytos
+created date : 2022，0811 11点01分'''
+msg = '    lllHello worldlll    '
+print(msg[1:4:2])
+print(msg)
+print(msg.strip())
+print(msg.strip('l'))
+print(msg.strip('l '))
+
+print(msg.lstrip())
+print(msg.rstrip())
+
+msg_2 = 'Erytos'
+print(msg_2.upper())
+print(msg_2.lower())
+
+msg_3 = 'E:r:y:t:o:s'
+print(msg_3.split(':'))
+print(msg_3.split(':',3))
+print(msg_3.rsplit(':',3))
+
+msg_4 = msg_3.split(':')
+print(':'.join(msg_4))
+print(''.join(msg_4))
+
+msg_5 = '1 + 1 = 1'
+print(msg_5.replace('1','2'))#没有改变原来的数据
+
+print(msg_5.isdigit())
