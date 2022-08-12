@@ -1,5 +1,8 @@
 '''Author : Erytos
 created date : 2022，0811 11点01分'''
+import abc
+
+
 msg = '    lllHello worldlll    '
 print(msg[1:4:2])
 print(msg)
@@ -27,3 +30,40 @@ msg_5 = '1 + 1 = 1'
 print(msg_5.replace('1','2'))#没有改变原来的数据
 
 print(msg_5.isdigit())
+
+msg_6 = 'abc'
+msg_7 = msg_6.capitalize()
+print(msg_7.swapcase())
+print(msg_6.count('a'))
+
+str1 = "this"
+str2 = str1.zfill(10)
+print(str2)
+
+str1 = "this"
+str2 = str1.center(10,"#")#居中并且填充到10个字符
+print(str2)
+
+str1 = "this"
+str2 = str1.ljust(10,"$")#居左同rjust
+print(str2)
+
+str_1 = "this is a test"
+trans_tab = str.maketrans('is','IS',"a")#（找对象，换掉的‘备胎’）
+print(trans_tab)#相当于创建一个表格对应（映射）
+print(str_1.translate(trans_tab))
+
+
+name_list = [1,2,3,4,5,1]
+# name_list.clear()
+print(name_list)
+#clear 不会创建新列表
+name_list.remove(3)
+print(name_list)
+del name_list[2]
+print(name_list)
+name_list.pop()
+print(name_list)
+print(name_list.count(1))
+print(name_list.index(1))#找第一个出现的位置
+
