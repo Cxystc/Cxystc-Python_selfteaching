@@ -67,3 +67,27 @@ print(name_list)
 print(name_list.count(1))
 print(name_list.index(1))#找第一个出现的位置
 
+dic = {'a': 1 ,'b': 2 ,'c' : 3}
+print(dic['a'])
+abc = dic.get('a')#返回值
+print(abc)
+# dic.fromkeys(一个关于键的元组，指定值)
+seq = ('d','e','f')
+value = [1,12,1]
+dic_1 = dic.fromkeys(seq,value)#产生新的字典每一个键对应的值是一样的
+dic.update(dic_1)#合并
+print(dic)
+print(dic_1)
+
+s='hello tank tank say hello sb sb'
+dic = {}
+for item in s.split():#item 就是键值
+    if item in dic:
+        dic[item] += 1 #dic[item]才是值
+    else:
+        dic[item] = 1 
+print(dic)
+
+
+
+
