@@ -47,10 +47,27 @@ def fun_4():
 fun_4()
 
 
-c = 3
-def fun_7():
-    nonlocal c
-    c += 1
-    print('c =',c)
-fun_7()
+# c = 3
+# def fun_7():
+#     nonlocal c
+#     c += 1
+#     print('c =',c)
+# fun_7()
         
+#匿名函数
+function_1 = lambda x : x**4
+function_1(10) #function_1 就是 lambda  需要一个参数
+#用函数封装匿名函数
+def function_2(a):
+    #到这里要有同可作用域中的a
+    return lambda x : x**a#匿名函数需要x
+function_3 = function_2(2)
+print(function_3(4))
+    
+function_4 = lambda x : x * 2 
+print (function_4(2))
+
+# y = 2 
+# function_5 = lambda y : y * 2 
+# print (function_5())
+#<lambda>() missing 1 required positional argument: 'y'
