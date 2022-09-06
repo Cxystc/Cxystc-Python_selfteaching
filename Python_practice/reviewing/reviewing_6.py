@@ -1,6 +1,8 @@
 '''Author:Chenzkai
 time:21点55分，2022年9月5日
-作用域在函数的定义阶段就已经确定'''
+作用域在函数的定义阶段就已经确定
+闭包函数，装饰器
+'''
 x= 1 
 def fun():
     print(x)
@@ -71,3 +73,28 @@ print (function_4(2))
 # function_5 = lambda y : y * 2 
 # print (function_5())
 #<lambda>() missing 1 required positional argument: 'y'
+
+#闭包函数
+#1，实现直接调用内层函数
+def xiaoai ():
+    print('123')
+    def greeting ():
+        print("Hello")
+    return greeting#返回函数的引用
+
+function_2 = xiaoai()
+function_2()#相当于xiaoai()()
+
+#2，实现对外层变量的使用
+def outer (a):
+    b = 10#到这里为止outer中的ab都是局部变量
+    def inner ():
+        print(a+b)#局部变量被内部函数引用
+    return inner#返回的是内部函数的引用
+Outer = outer(5)#面向对象变成思想，和类的异曲同工？
+Outer_1 = outer (6)
+Outer()#15
+Outer_1()#16,闭包可以识别不一样的局部临时变量a
+
+
+
