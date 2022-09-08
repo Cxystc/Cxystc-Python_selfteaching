@@ -77,3 +77,82 @@ if dict1 == dict:
 if dict1 is dict:
     print('yes')#dict isn't dict1
 else:print('\nNo,they are difference')
+
+#生成器：其实就是一个生成迭代器的函数，只能做迭代操纵，每次遇到yield都会暂停并且保存当前状态，下一次运行next就从此开始
+def fibonacci(m):
+    a,b,n = 0,1,0
+    while True:
+        if n > m:
+            return 
+        yield a
+        a,b = b,a+b
+        n += 1
+
+f  = fibonacci (10)
+while True :
+    try:
+        print(next(f),'\n')
+    except StopIteration :
+        break
+
+def generator():
+    print('1')
+    yield 2
+    print('3')
+    yield 4
+    print('5')
+    yield 6
+    print('7')
+    yield 8
+
+generation = generator()
+for i in generation:
+    print(i)
+
+#同样的结果还可以表示为
+def Ud_generator():
+    yield from range(1,9)
+
+F = Ud_generator()
+for i in Ud_generator():
+    print(i)
+
+def test(val):
+    while True:
+        y = yield val#首次运行的时候先运行赋值语句的右侧
+        val = y 
+t = test(19)
+print(next(t))
+print(next(t))
+# 19
+# None               #所以第二次运行的时候y根本没有被赋值，知道迭代器重启，yield = None 才赋值，所以会返回None
+
+def test(val):
+    while True:
+        y = yield val#首次运行的时候先运行赋值语句的右侧
+        val = y 
+t = test(19)
+print(next(t))
+print(t.send(20))
+# 19
+# 20
+
+#生成器的三元表达式
+gen  = (i for i in range(19))
+
+#相当于
+# def gen_(val):
+#     a = 0
+#     n = 0 
+#     while True:
+#         if n > val:
+#             return
+#         yield a 
+#         a += 1 
+#         n += 1 
+# gen_1 = gen_(19)
+# for a in gen_1:
+#     print(a)
+
+for a in gen:
+    print(a)
