@@ -37,8 +37,14 @@ def Searching_number(list,target_number):
 
 Searching_number (nums,101)
 
-
-if 101 in nums:
-    print('yes')
-else: 
-    print('no')
+#用递归写fibonacci数列
+def Fibonacci(a,b,list):
+    c = a + b 
+    if c >= 1000:
+        print(list)
+        print("Finishied")
+        return
+    list.append(c)
+    Fibonacci(b,c,list)
+list = [0,1]
+Fibonacci(0,1,list)
