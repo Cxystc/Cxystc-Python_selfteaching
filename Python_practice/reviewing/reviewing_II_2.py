@@ -44,6 +44,6 @@ for item in final_res:
     if item['name'][0] == ('A' or 'a'):#记得加括号
         print(item)
         final_res.remove(item)
-print(final_res)
+print(final_res)###
 
 Title_name(final_res)
