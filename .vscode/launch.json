@@ -11,11 +11,12 @@
             "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${fileDirname}",
+            "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
             "miDebuggerPath": "D:\\download_from_brwoser\\x86_64-8.1.0-release-win32-seh-rt_v6-rev0\\mingw64\\bin\\gdb.exe",
+            "preLaunchTask":"C/C++: gcc.exe 生成活动文件",
             "setupCommands": [
                 {
                     "description": "为 gdb 启用整齐打印",
@@ -28,7 +29,6 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "C/C++: gcc.exe 生成活动文件"
         }
     ]
 }
