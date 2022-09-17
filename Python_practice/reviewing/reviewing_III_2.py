@@ -54,5 +54,5 @@ python = Course(200,365)
 java = Course(400,200)
 student1 = SchoolStudent('Tony',18,'male',100)
 student1.course = python
-student1.course.__info__()
+student1.course.__info__()  
 print(student1.__dict__)
