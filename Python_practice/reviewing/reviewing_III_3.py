@@ -38,7 +38,7 @@ class son2(Mother):
     def Must_to_do(self):
         print("son2")
 class son3(Mother):
-    def Must_to_do(self):
+    def Must_to(self):
         pass
 
 One = son1()
