@@ -13,8 +13,8 @@ main()
 {
     struct Struction *Creating();                             //创建一个动态链表
     struct Struction *RunThrough(struct Struction *);         //遍历链表
-    struct Struction *Adding(struct Struction *, int data);   //向链表中添加节点
-    struct Struction *Removing(struct Struction *, int data); //删除列表的某个节点
+    struct Struction *Adding(struct Struction *, int data);   //向链表中添加结点
+    struct Struction *Removing(struct Struction *, int data); //删除列表的某个结点
     struct Struction *Clear(struct Struction *);              //清空列表
     struct Struction *Free(struct Struction *);               //销毁列表
 
@@ -36,16 +36,15 @@ struct Struction *Creating()
     {
         p2 = malloc(sizeof(struct Struction)); //开辟空间//p2重新赋值
         printf("Please input your data ,use '-1'to break the loop:\n");
-        scanf("%d", &p2->data); //这样才行为什么呢
-
-        /*
-        int dt;
-        scanf("%d",&dt);
-        p2->date = dt ; 这样给dt赋值-1，p2->data 却是1为什么*/
+        scanf("%d", &p2->data); 
+  
+        // int dt;
+        // scanf("%d",&dt);
+        // p2->data = dt ; 
 
         if (p2->data == -1)
         {
-            p1->next = p2; // 最后一个节点也要连起来，不然就会出现野指针
+            p1->next = p2; // 最后一个结点也要连起来，不然就会出现野指针
             p2->next = NULL;
             break; //判断退出
         }
