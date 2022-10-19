@@ -1,9 +1,14 @@
 #include <stdio.h>
 int main()
-{      
-    char a[10];//声明一个字符串
-    printf("Please input your string:\n");
-    scanf("%s",a);//a本身就是一个地址不用加&
-    printf("%s\n",a);
-    return 0;
+{   int a = 62707;
+    int b = 2896;
+    int c;
+    c += (a % 10) * 100000;
+    c += (a/10)%10 * 10000;
+    c += (a/100)%10 * 1000;
+    c += (b%10) *100;
+    c += (b/10) %10 *10;
+    c += (b/100) %10 ;
+    printf("a=%d,b=%d,c=%d\n", a, b, c);
 }
+

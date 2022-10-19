@@ -36,11 +36,11 @@ struct Struction *Creating()
     {
         p2 = malloc(sizeof(struct Struction)); //开辟空间//p2重新赋值
         printf("Please input your data ,use '-1'to break the loop:\n");
-        scanf("%d", &p2->data); 
+        // scanf("%d", &p2->data); 
   
-        // int dt;
-        // scanf("%d",&dt);
-        // p2->data = dt ; 
+        int dt;
+        scanf("%d",&dt);
+        p2->data = dt ; 
 
         if (p2->data == -1)
         {

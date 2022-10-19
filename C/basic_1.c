@@ -2,6 +2,7 @@
 int main()
 {
     /* 我的第一个 C 程序 */
-    printf("Hello, World! \n");
+    int a = 8;
+    printf("%%%d\n",a);
     return 0;
 }
