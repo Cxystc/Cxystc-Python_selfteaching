@@ -1,24 +1,47 @@
+
 #include <stdio.h>
-int main()
+int change(int *p)
 {
-    int a[10] = {1, 23};
-    for (int i = 0; i < 5; i++)
+
+    int i, m, j;
+        for (i = 0; i < 10; i++)
+        {
+            if (*(p + i) == 0)
+            {
+                int temp = *(p + i);
+                for (j = i + 1; j < 10; j++)
+                {
+                    *(p + j - 1) = *(p + j);
+                }
+                *(p+j-1) = temp;//最后一个总是0
+            }
+        }
+        for (i = 0; i < 10; i++)
+        {
+            printf("%2d", *(p + i));
+        }
+    return 0;
+}
+
+int main(void)
+{
+    int a[10];
+    int i;
+    printf("Please input:");
+    for (i = 0; i < 10; i++)
     {
-        printf("%d ", a[i]);
+        scanf("%d ", &a[i]);
     }
 
-    int b[2][3] = {{1, 2, 3}, {1, 23, 5}};
-    int c = b[2][1]; //可以这样子获取二维数组
-    printf("%d", b);
+    printf("a[10]=");
+    for (i = 0; i < 10; i++)
+    {
+        printf("%2d", a[i]);
+    }
+    printf("\n");
 
-    // 3维4维以此类推
-    //没学指针这行不管，定义了数组a之后，a这个数组名就是一个指针，指向第一个元素；
-
-    //字符数组：
-    char name[15] = "Guoyongtong";
-    printf("\n%s\n", name);
-
-    //声明但是不定义
-    char name1[15] = {"dilsidlfidsdifld" };//里面有16个字符 报错：最后一个结束符是\0所以实际上只有15个位置
-    char name2[2][15] = {"Guoyongtong","hhhh"};
+    int *p;
+    p = a;
+    printf("after:");
+    change(p);
 }

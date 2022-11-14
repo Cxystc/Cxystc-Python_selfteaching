@@ -1,12 +1,39 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int x = 1;
-int y = 2;
-int main(void)
+
+int main()
 {   
-  const char b = 'D';
-  const int a = '\010';
-  x = y = 100;
-  printf("%d%d\n",x,y);
+int a = 5 , b = 4 , c = 3 , d = 2 ,e = 1;
+// if (a>b){
+//   printf("1");
+// }
+
+
+// if (b>c){
+//   printf("2");
+// }
+// if{
+//   printf("3");
+// }
+// else{
+//   printf("4");
+// }
+
+
+// if (c>d){
+//   printf("5");
+// }
+// else if {
+//   printf("6");
+// }
+
+
+if(d>e){
+  printf("7");
+}
+else{
+  printf("8");
+}
+
 }
