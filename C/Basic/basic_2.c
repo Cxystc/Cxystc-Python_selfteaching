@@ -1,20 +1,13 @@
-//递归逆
 #include <stdio.h>
-void change()
-{
-    char a;
-    a = getchar();
-    if (a != '\n'){
-        change();
-    }
-    else
-        return;
-printf("%c", a);
-
-}
-int main(void)
-{
-    char a;
-    printf("Please input :");
-    change();
+int main()
+{   
+    int sum = 0 , n ;
+    scanf("%d",&n);
+    do {
+        if ((n/100)%10 == 3 ){
+            sum += n; 
+        }
+        scanf("%d",&n);
+    }while(n);
+    printf("sum = %d\n",sum);
 }
