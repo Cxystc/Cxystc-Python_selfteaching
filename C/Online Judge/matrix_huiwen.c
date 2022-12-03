@@ -13,9 +13,9 @@ void reversing(char *list, int n)
         }
     }
     char temp = list[n - 1];
-    for (int i = 0; i < n - 1; i++)
+    for (int i = n - 1; i > 0; i--)
     {
-        list[i + 1] = list[i];
+        list[i] = list[i - 1];
     }
     list[0] = temp;
 } //倒序
@@ -76,17 +76,26 @@ int main()
             list_getting((char **)matrix, circle, n, i, LEN);
             strcpy(b, circle);
             reversing(b, LEN); // b就是返序后的circle
-
+            printf("\n");
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    printf("%c", matrix[i][j]);
+                }
+                printf("\n");
+            }
+            printf("\n");
             //打印一圈
             for (int i = 0; i < LEN; i++)
             {
-                // printf("%c ",circle[i]);
+                printf("%c ", circle[i]);
             }
-            // printf("\n");
+            printf("\n");
             //打印反向的函数
             for (int i = 0; i < LEN; i++)
             {
-                // printf("%c ",b[i]);
+                printf("%c ", b[i]);
             }
 
             for (int i = 0; i < LEN; i++)
@@ -99,8 +108,8 @@ int main()
             }
         }
         if (flag == 0)
-            printf("No\n");
+            printf("\nNo\n");
         if (flag == 1)
-            printf("Yes\n");
+            printf("\nYes\n");
     }
 }
