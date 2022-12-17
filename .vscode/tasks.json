@@ -8,11 +8,14 @@
             "args": [
                 "-g",
                 "${file}",
+                "-L'D:/FLTK/fltk/fltk/lib'",
+                "-I'D:/FLTK/fltk/fltk/include'",
                 "-o",
                 "D:/My_code/Cxystc-Python_selfteaching-1/C/exe/${fileBasenameNoExtension}.exe"
             ],
             "options": {
-                "cwd": "${workspaceFolder}"
+                "cwd": "${workspaceFolder}",
+                "fltk": "D:/FLTK/fltk/fltk/bin"
             },
             "problemMatcher": [
                 "$gcc"

@@ -20,6 +20,9 @@ int main()
     int *p4 [4];//指针的数组
     for (int i = 0; i < 3; i++)
     {   
+
+
+        
         for (int j = 0; j < 4; j++)
         {
             p4[j] = &a[i][j][0]; 

@@ -2,8 +2,6 @@
 #include <string.h>
 int main(int argc, char **argv)
 {
-    // int argc = 4 ; 
-    // char argv[][4] = {{"ccc"},{"bbb"},{"aaa"}};
     char argv_ [argc][100] ;
 
     for (int i = 0 ; i <argc ; i++){
