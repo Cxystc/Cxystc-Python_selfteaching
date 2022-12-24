@@ -7,8 +7,7 @@
                 "D:/download_from_brwoser/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/**",
                 "D:/download_from_brwoser/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed/**",
                 "D:/download_from_brwoser/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include/**",
-                "D:/My_code/Cxystc-Python_selfteaching-1/C/**",
-                "D:/FLTK/fltk/fltk/include"
+                "D:/My_code/Cxystc-Python_selfteaching-1/C/**"
             ],
             "browse": {
                 "path": [

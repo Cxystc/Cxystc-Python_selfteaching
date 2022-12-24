@@ -5,17 +5,22 @@
             "type": "cppbuild",
             "label": "C/C++: gcc.exe 生成活动文件",
             "command": "D:/download_from_brwoser/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/bin/gcc.exe",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
             "args": [
                 "-g",
-                "${file}",
-                "-L'D:/FLTK/fltk/fltk/lib'",
-                "-I'D:/FLTK/fltk/fltk/include'",
+                "${fileDirname}\\*.c",
                 "-o",
                 "D:/My_code/Cxystc-Python_selfteaching-1/C/exe/${fileBasenameNoExtension}.exe"
             ],
             "options": {
-                "cwd": "${workspaceFolder}",
-                "fltk": "D:/FLTK/fltk/fltk/bin"
+                "cwd": "${workspaceFolder}"
             },
             "problemMatcher": [
                 "$gcc"
