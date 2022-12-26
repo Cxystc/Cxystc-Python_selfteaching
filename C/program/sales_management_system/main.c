@@ -2,33 +2,244 @@
 #include "allinclude.h"
 #include "function.h"
 #include "setting.h"
-//å®å®šä¹‰äº§å“çš„é•¿åº¦
-// å®šä¹‰ç»“æ„ä½“,å‘˜å·¥å¯¼å‘
+//ºê¶¨Òå²úÆ·µÄ³¤¶È
+// ¶¨Òå½á¹¹Ìå,Ô±¹¤µ¼Ïò
+int status = 0;
+void menu(int, int, long long *, long long *, Workers *);
 void main()
 {
-    // åˆå§‹åŒ–é“¾è¡¨ï¼›
-    long long *ProductNumber = setting(); //è¾“å…¥äº§å“çš„ç¼–å·
-
-    Workers *head = creating(4, ProductNumber); //ä¿ç•™è¾“å…¥äººæ•°æ¥å£
-
-    head = input(head, ProductNumber); //è¾“å…¥å¯¹åº”å·¥å·çš„äººçš„é”€å”®é¢
-
-    time_t timep;
-    time(&timep); //ç§’æ•°
-    char *date = getdate(timep);
-    char *filename = getfilepath(date); //ä¿ç•™ä¿®æ”¹æ—¥æœŸçš„æ¥å£
-    infile(head, filename);
-
-    printf("Finished\n");
-    kept_day(10); //ä¿ç•™å¯ä»¥ç•™ä¸‹çš„å¤©æ•°ï¼›
-
-    long long wNumber = 2222222222;
-    Worker_Statistics *WS;
-    WS = (Worker_Statistics *)malloc(sizeof(Worker_Statistics));
-    WS = Wstatistic(wNumber, 5);
-
-    long long pNumber = 5;
-    Product_Statistics *PS;
-    PS = (Product_Statistics *)malloc(sizeof(Product_Statistics));
-    PS = Pstatistic(pNumber,5,ProductNumber);
+    long long *ProductNumber = setting();                      //¶ÁÈ¡²úÆ·µÄ±àºÅ
+    long long *WorkersNumber = wsetting();                     //¶ÁÈ¡Ô±¹¤±àºÅ
+    Workers *head = creating(4, ProductNumber, WorkersNumber); //²»±£ÁôÊäÈëÈËÊı½Ó¿Ú
+    int n = 0;
+    menu(n, 0, ProductNumber, WorkersNumber, head);
+    while (1)
+    {
+        if (kbhit())
+        {
+            char c = getch(); //¶ÁÈ¡°´¼ü£¬Ã»ÓĞ»Ø³µ
+            if (GetAsyncKeyState(VK_UP))
+            {
+                n--;
+                if (n < 0)
+                    n = 6;
+                system("cls");
+                menu(n, 0, ProductNumber, WorkersNumber, head);
+            }
+            if (GetAsyncKeyState(VK_DOWN))
+            {
+                n++;
+                if (n > 6)
+                    n = 0;
+                system("cls");
+                menu(n, 0, ProductNumber, WorkersNumber, head);
+            }
+            if (GetAsyncKeyState(VK_RETURN) & 0x8000)
+            {
+                system("cls");
+                menu(n, 1, ProductNumber, WorkersNumber, head);
+                if (status == 1)
+                    break;
+                else
+                {
+                    system("cls");
+                    menu(n, 0, ProductNumber, WorkersNumber, head);
+                }
+            }
+            Sleep(100);
+        }
+    }
 }
+
+void menu(int n, int flag, long long *ProductNumber, long long *WorkersNumber, Workers *head)
+{ //¸ßÁÁÎ»ÖÃ
+    switch (n)
+    {
+    case 0:
+        printf("\n=============²Ëµ¥=============\n");
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x70); //¸ßÁÁ
+        printf("            Ğ´Ö½Ìõ            ");
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x07); //Õı³£
+        printf("\n          °´Ô±¹¤Í³¼Æ          ");
+        printf("\n          °´²úÆ·Í³¼Æ          ");
+        printf("\n         ĞŞ¸Ä±£´æÌìÊı");
+        printf("\n         ĞŞ¸ÄÔ±¹¤¹¤ºÅ         ");
+        printf("\n         ĞŞ¸Ä²úÆ·±àºÅ         ");
+        printf("\n           ÍË³öÏµÍ³");
+        printf("\n==============================\n");
+        if (flag == 1)
+        {
+            head = input(head, ProductNumber);
+            if (head == NULL)
+                return;
+            time_t timep;
+            time(&timep); //ÃëÊı
+            char *date = getdate(timep);
+            char *filename = getfilepath(date); //±£ÁôĞŞ¸ÄÈÕÆÚµÄ½Ó¿Ú
+            infile(head, filename);             //±£´æ *
+        }
+        break;
+
+    case 1:
+        printf("\n=============²Ëµ¥=============");
+        printf("\n            Ğ´Ö½Ìõ            \n");
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x70); //¸ßÁÁ
+        printf("          °´Ô±¹¤Í³¼Æ          ");
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x07); //Õı³£
+        printf("\n          °´²úÆ·Í³¼Æ         ");
+        printf("\n         ĞŞ¸Ä±£´æÌìÊı");
+        printf("\n         ĞŞ¸ÄÔ±¹¤¹¤ºÅ         ");
+        printf("\n         ĞŞ¸Ä²úÆ·±àºÅ         ");
+        printf("\n           ÍË³öÏµÍ³");
+        printf("\n==============================\n");
+        if (flag == 1)
+        {
+            long long wNumber;
+            printf("ÇëÊäÈëÒª²éÑ¯µÄÔ±¹¤¹¤ºÅ£º\n");
+            scanf("%lld", &wNumber);
+
+            //²éÑ¯ÊÇ·ñÓĞÕâ¸öÈË£º
+            int flag = 0;
+            for (int i = 0; i < 4; i++)
+            {
+                if (wNumber == WorkersNumber[i])
+                {
+                    flag = 1;
+                    break;
+                }
+            }
+            if (flag == 0)
+            {
+                printf("Î´ÕÒµ½´Ë¹¤ºÅ£¡\n");
+                system("pause");
+                break;
+            }
+
+            Worker_Statistics *WS;
+            WS = (Worker_Statistics *)malloc(sizeof(Worker_Statistics));
+            int period;
+            printf("ÇëÊäÈëÒª²éÑ¯µÄÌìÊı\n");
+            scanf("%d", &period);
+            WS = Wstatistic(wNumber, period); //°´Ô±¹¤Í³¼Æ*
+            //´òÓ¡µÄº¯Êı
+            Wprint(WS,ProductNumber);
+            system("pause");
+        }
+        break;
+    case 2:
+        printf("\n=============²Ëµ¥=============");
+        printf("\n            Ğ´Ö½Ìõ            ");
+        printf("\n          °´Ô±¹¤Í³¼Æ         \n");
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x70); //¸ßÁÁ
+        printf("          °´²úÆ·Í³¼Æ          ");
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x07); //Õı³£
+        printf("\n         ĞŞ¸Ä±£´æÌìÊı");
+        printf("\n         ĞŞ¸ÄÔ±¹¤¹¤ºÅ         ");
+        printf("\n         ĞŞ¸Ä²úÆ·±àºÅ         ");
+        printf("\n           ÍË³öÏµÍ³");
+        printf("\n==============================\n");
+        if (flag == 1)
+        {
+            long long pNumber;
+            printf("ÇëÊäÈëÒª²éÑ¯µÄ²úÆ·±àºÅ£º\n");
+            scanf("%lld", &pNumber);
+            //²éÑ¯ÊÇ·ñÓĞÕâ¸ö²úÆ·
+            int flag = 0;
+            for (int i = 0; i < 5; i++)
+            {
+                if (pNumber == ProductNumber[i])
+                {
+                    flag = 1;
+                }
+            }
+            if (flag == 0)
+            {
+                printf("Î´ÕÒµ½´Ë²úÆ·£¡\n");
+                system("pause");
+                break;
+            }
+            Product_Statistics *PS;
+            PS = (Product_Statistics *)malloc(sizeof(Product_Statistics));
+            int period;
+            printf("ÇëÊäÈëÒª²éÑ¯µÄÌìÊı\n");
+            scanf("%d", &period);
+            PS = Pstatistic(pNumber, period, ProductNumber); // °´²úÆ·Í³¼Æ *
+            //´òÓ¡µÄ²ÎÊı
+            Pprint(PS,WorkersNumber);
+            system("pause");
+        }
+        break;
+    case 3:
+        printf("\n=============²Ëµ¥=============");
+        printf("\n            Ğ´Ö½Ìõ            ");
+        printf("\n          °´Ô±¹¤Í³¼Æ         ");
+        printf("\n          °´²úÆ·Í³¼Æ          \n");
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x70); //¸ßÁÁ
+        printf("         ĞŞ¸Ä±£´æÌìÊı         ");
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x07); //Õı³£
+        printf("\n         ĞŞ¸ÄÔ±¹¤¹¤ºÅ         ");
+        printf("\n         ĞŞ¸Ä²úÆ·±àºÅ         ");
+        printf("\n           ÍË³öÏµÍ³");
+        printf("\n==============================\n");
+        if (flag == 1)
+        {
+            kept_day(daysetting(1));
+            printf("ĞŞ¸Ä³É¹¦£¡\n");
+            system("pause");
+        }
+        break;
+    case 4:
+        printf("\n=============²Ëµ¥=============");
+        printf("\n            Ğ´Ö½Ìõ            ");
+        printf("\n          °´Ô±¹¤Í³¼Æ         ");
+        printf("\n          °´²úÆ·Í³¼Æ          \n");
+        printf("         ĞŞ¸Ä±£´æÌìÊı\n");
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x70); //¸ßÁÁ
+        printf("         ĞŞ¸ÄÔ±¹¤¹¤ºÅ         ");
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x07); //Õı³£
+        printf("\n         ĞŞ¸Ä²úÆ·±àºÅ         \n");
+        printf("           ÍË³öÏµÍ³           ");
+        printf("\n==============================\n");
+        if (flag == 1)
+        {
+            rwsetting();
+        }
+            break;
+    case 5:
+        printf("\n=============²Ëµ¥=============");
+        printf("\n            Ğ´Ö½Ìõ            ");
+        printf("\n          °´Ô±¹¤Í³¼Æ         ");
+        printf("\n          °´²úÆ·Í³¼Æ          \n");
+        printf("         ĞŞ¸Ä±£´æÌìÊı\n");
+        printf("         ĞŞ¸ÄÔ±¹¤¹¤ºÅ         \n");
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x70); //¸ßÁÁ
+        printf("         ĞŞ¸Ä²úÆ·±àºÅ         ");
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x07); //Õı³£
+        printf("\n           ÍË³öÏµÍ³           ");
+        printf("\n==============================\n");
+        if (flag == 1)
+        {
+            resetting();
+        }
+            break;
+    case 6:
+        printf("\n=============²Ëµ¥=============");
+        printf("\n            Ğ´Ö½Ìõ            ");
+        printf("\n          °´Ô±¹¤Í³¼Æ         ");
+        printf("\n          °´²úÆ·Í³¼Æ          \n");
+        printf("         ĞŞ¸Ä±£´æÌìÊı\n");
+        printf("         ĞŞ¸ÄÔ±¹¤¹¤ºÅ         ");
+        printf("\n         ĞŞ¸Ä²úÆ·±àºÅ         \n");
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x70); //¸ßÁÁ
+        printf("           ÍË³öÏµÍ³           ");
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x07); //Õı³£
+        printf("\n==============================\n");
+        if (flag == 1)
+        {
+            status = 1;
+            kept_day(daysetting(0)); //Ä¬ÈÏÇåÀí»º´æ
+        }
+        break;
+    }
+}
+

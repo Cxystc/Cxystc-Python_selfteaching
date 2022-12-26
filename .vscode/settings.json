@@ -6,6 +6,8 @@
         "*.tcc": "c",
         "allinclude.h": "c",
         "struct.h": "c",
-        "setting.h": "c"
+        "setting.h": "c",
+        "windows.h": "c",
+        "initial.h": "c"
     }
 }

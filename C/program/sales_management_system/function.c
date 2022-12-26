@@ -3,7 +3,7 @@
 #include "initial.h"
 #include "setting.h"
 
-Workers *creating(int Workers_amount, long long *ProductNumber) //è¿™é‡Œå†ä¼ ä¸€ä¸ªæ•°ç»„ï¼Œå¯ä»¥è‡ªå®šä¹‰å‘˜å·¥çš„å·¥å·
+Workers *creating(int Workers_amount, long long *ProductNumber, long long *WorkersNumber) //ÕâÀïÔÙ´«Ò»¸öÊı×é£¬¿ÉÒÔ×Ô¶¨ÒåÔ±¹¤µÄ¹¤ºÅ
 {
     Workers *p;
     Workers *pn;
@@ -12,7 +12,7 @@ Workers *creating(int Workers_amount, long long *ProductNumber) //è¿™é‡Œå†ä¼ ä¸
     for (int i = 0; i < Workers_amount; i++)
     {
         memset(p, 0, sizeof(Workers));
-        // éšä¾¿å†™ç‚¹å·¥å· //åæœŸå¯ä¿®æ”¹
+        // Ëæ±ãĞ´µã¹¤ºÅ //ºóÆÚ¿ÉĞŞ¸Ä
         p->Product1 = ProductNumber[0];
         p->Product2 = ProductNumber[1];
         p->Product3 = ProductNumber[2];
@@ -20,19 +20,19 @@ Workers *creating(int Workers_amount, long long *ProductNumber) //è¿™é‡Œå†ä¼ ä¸
         p->Product5 = ProductNumber[4];
         if (i == 0)
         {
-            p->Number = 1111111111;
+            p->Number = WorkersNumber[0];
         }
         if (i == 1)
         {
-            p->Number = 2222222222;
+            p->Number = WorkersNumber[1];
         }
         if (i == 2)
         {
-            p->Number = 3333333333;
+            p->Number = WorkersNumber[2];
         }
         if (i == 3)
         {
-            p->Number = 4444444444;
+            p->Number = WorkersNumber[3];
         }
         if (i == 4)
         {
@@ -43,17 +43,16 @@ Workers *creating(int Workers_amount, long long *ProductNumber) //è¿™é‡Œå†ä¼ ä¸
             pn = p;
             p = p->Next;
             p = (Workers *)malloc(sizeof(Workers));
-            pn->Next = p; //é“¾æ¥å¹¶å¼€è¾Ÿ
+            pn->Next = p; //Á´½Ó²¢¿ª±Ù
         }
     }
-    printf("Creating Successfully\n");
     return head;
 }
 
 Workers *input(Workers *head, long long *ProductNumber)
 {
     long long workers;
-    printf("Please input the workers Number : \n");
+    printf("ÇëÊäÈëÔ±¹¤µÄ¹¤ºÅ: \n");
     scanf("%lld", &workers);
     Workers *p = head;
     int flag = 0;
@@ -61,9 +60,9 @@ Workers *input(Workers *head, long long *ProductNumber)
     {
         i++;
         if (p->Number == workers)
-        { // è¾¾åˆ°äº†é“¾è¡¨çš„ä½ç½®
+        { // ´ïµ½ÁËÁ´±íµÄÎ»ÖÃ
             flag = 1;
-            printf("please input the amount you sold: \n");
+            printf("ÊäÈë¶ÔÓ¦ÉÌÆ·µÄÏúÊÛÊıÄ¿: \n");
             int P_num;
             for (int j = 0; j < 5; j++)
             {
@@ -92,33 +91,32 @@ Workers *input(Workers *head, long long *ProductNumber)
                     break;
                 }
             }
+            system("pause");
             return head;
-            if (i != 4)
-            {
-                p = p->Next;
-            }
         }
     }
     if (flag == 0)
     {
-        printf("Your Numbers is invalid!\n");
+        printf("ÄúÊäÈëµÄ¹¤ºÅÓĞÎó\n");
+        system("pause");
+        return NULL;
     }
 }
 
-void infile(Workers *head, char *filename) //ä¸€å£æ°”ç›´æ¥ï¼Œå…¨éƒ¨pullè¿›å»
+void infile(Workers *head, char *filename) //Ò»¿ÚÆøÖ±½Ó£¬È«²¿pull½øÈ¥
 {
     Workers *p;
     p = head;
     FILE *file = fopen(filename, "w+");
     for (int j = 0; j < 4; j++)
     {
-        fprintf(file, "%lld\n", p->Number); //å…ˆæ‰“å°å‘˜å·¥çš„number
+        fprintf(file, "%lld\n", p->Number); //ÏÈ´òÓ¡Ô±¹¤µÄnumber
         for (int i = 0; i < 5; i++)
         {
             switch (i)
             {
             case 0:
-                fprintf(file, "%lld\n", p->Amount1); //æŒ‰é¡ºåºè¾“å…¥äº§å“çš„é”€å”®é¢
+                fprintf(file, "%lld\n", p->Amount1); //°´Ë³ĞòÊäÈë²úÆ·µÄÏúÊÛ¶î
                 break;
             case 1:
                 fprintf(file, "%lld\n", p->Amount2);
@@ -137,11 +135,11 @@ void infile(Workers *head, char *filename) //ä¸€å£æ°”ç›´æ¥ï¼Œå…¨éƒ¨pullè¿›å»
         p = p->Next;
     }
     fclose(file);
-    printf("saved complished!\n");
+    printf("ÒÑ±£´æ\n");
 }
 
 char *getfilepath(char *filename)
-{ //ä¿®æ”¹æ•°æ®å­˜å‚¨åœ°å€ä¹Ÿåœ¨è¿™é‡Œ,è¿™ä¸ªå‡½æ•°æœ€åå¾—åˆ°ä¸€ä¸ªæ–‡ä»¶çš„ç»å¯¹è·¯å¾„
+{ //ĞŞ¸ÄÊı¾İ´æ´¢µØÖ·Ò²ÔÚÕâÀï,Õâ¸öº¯Êı×îºóµÃµ½Ò»¸öÎÄ¼şµÄ¾ø¶ÔÂ·¾¶
     FILE *file;
     file = fopen("./setting.txt", "a+");
     char *buffer;
@@ -151,7 +149,7 @@ char *getfilepath(char *filename)
     if (buffer[0] == '\0')
     {
         char path[128] = {0};
-        printf("please input your path to save data :\n");
+        printf("ÇëÊäÈëÊı¾İ±£´æµØÖ·\n");
         scanf("%s", path);
         fwrite(path, sizeof(char), strlen(path), file);
         fclose(file);
@@ -166,7 +164,7 @@ char *getfilepath(char *filename)
     }
 }
 
-char *getdate(time_t timep) //æŠŠç§’æ•°å˜æˆæ—¥æœŸçš„å‡½æ•°
+char *getdate(time_t timep) //°ÑÃëÊı±ä³ÉÈÕÆÚµÄº¯Êı
 {
     struct tm *p;
     p = gmtime(&timep);
@@ -179,15 +177,15 @@ char *getdate(time_t timep) //æŠŠç§’æ•°å˜æˆæ—¥æœŸçš„å‡½æ•°
 
 void kept_day(int kept_day)
 {
-    // kept_day ä¿å­˜çš„å¤©æ•°
+    // kept_day ±£´æµÄÌìÊı
     char *_date;
     _date = (char *)malloc(sizeof(char) * 10);
     time_t timep;
     time(&timep);
-    timep -= (kept_day)*86400; //æ­¤æ—¶çš„æ—¥æœŸå°±æ˜¯å¼€å§‹åˆ æ‰çš„æ—¥æœŸ
+    timep -= (kept_day)*86400; //´ËÊ±µÄÈÕÆÚ¾ÍÊÇ¿ªÊ¼É¾µôµÄÈÕÆÚ
     _date = getdate(timep);
 
-    //è·å–å­˜æ”¾æ–‡ä»¶çš„è·¯å¾„
+    //»ñÈ¡´æ·ÅÎÄ¼şµÄÂ·¾¶
     while (1)
     {
         char *filepath;
@@ -206,7 +204,6 @@ void kept_day(int kept_day)
             break;
         }
     }
-    printf("clear finished\n");
 }
 
 Product_Statistics *Pstatistic(long long Product_Number, int Period, long long *ProductNumber)
@@ -222,10 +219,10 @@ Product_Statistics *Pstatistic(long long Product_Number, int Period, long long *
     memset(Pstruct, 0, sizeof(Product_Statistics));
     Pstruct->ProductNumber = Product_Number;
     time_t timep;
-    time(&timep); //ä»Šå¤©çš„ç§’æ•°
+    time(&timep); //½ñÌìµÄÃëÊı
     for (int i = 0; i < Period; i++)
-    {                       //åœ¨è¿™ä¸ªå¾ªç¯é‡Œå°±æ˜¯åŒä¸€ä¸ªæ—¶æœŸ
-        timep -= i * 86400; //å¾—åˆ°å¯¹åº”å¤©æ•°
+    {                       //ÔÚÕâ¸öÑ­»·Àï¾ÍÊÇÍ¬Ò»¸öÊ±ÆÚ
+        timep -= i * 86400; //µÃµ½¶ÔÓ¦ÌìÊı
         char *date;
         date = (char *)malloc(sizeof(char) * 10);
         date = getdate(timep);
@@ -238,14 +235,14 @@ Product_Statistics *Pstatistic(long long Product_Number, int Period, long long *
         if (file != NULL)
         {
             for (int j = 1; j <= 5; j++)
-            { //åœ¨è¿™ä¸ªå¾ªç¯é‡Œå°±æ˜¯åŒä¸€ä¸ªæ–‡ä»¶
+            { //ÔÚÕâ¸öÑ­»·Àï¾ÍÊÇÍ¬Ò»¸öÎÄ¼ş
                 char *buffer;
                 buffer = (char *)malloc(sizeof(char) * 128);
                 fgets(buffer, 128, file);
                 memset(buffer, 0, 128);
 
                 for (int z = 0; z < 5; z++)
-                { //åœ¨è¿™ä¸ªå¾ªç¯é‡Œå°±æ˜¯åŒä¸€ä¸ªå°ç»„5è¡Œ
+                { //ÔÚÕâ¸öÑ­»·Àï¾ÍÊÇÍ¬Ò»¸öĞ¡×é5ĞĞ
 
                     memset(buffer, 0, 128);
                     fgets(buffer, 128, file);
@@ -280,6 +277,7 @@ Product_Statistics *Pstatistic(long long Product_Number, int Period, long long *
             continue;
         }
     }
+    return Pstruct;
 }
 
 Worker_Statistics *Wstatistic(long long Worker_Number, int Period)
@@ -293,11 +291,11 @@ Worker_Statistics *Wstatistic(long long Worker_Number, int Period)
     memset(wstruct, 0, sizeof(Worker_Statistics));
     wstruct->WorkerNumber = Worker_Number;
     time_t timep;
-    time(&timep); //ä»Šå¤©çš„ç§’æ•°
+    time(&timep); //½ñÌìµÄÃëÊı
     for (int i = 0; i < Period; i++)
-    {                       //åŒä¸€ä¸ªæ—¶æœŸ
-        int flag = 0;       //æ ‡è®°
-        timep -= i * 86400; //å¾—åˆ°å¯¹åº”å¤©æ•°
+    {                       //Í¬Ò»¸öÊ±ÆÚ
+        int flag = 0;       //±ê¼Ç
+        timep -= i * 86400; //µÃµ½¶ÔÓ¦ÌìÊı
         char *date;
         date = (char *)malloc(sizeof(char) * 10);
         date = getdate(timep);
@@ -349,4 +347,79 @@ Worker_Statistics *Wstatistic(long long Worker_Number, int Period)
             } while (1);
         }
     }
+    return wstruct;
+}
+
+void Pprint(Product_Statistics *P, long long *Wlist)
+{
+    printf("²úÆ·±àºÅ£º%lld\n", P->ProductNumber);
+    int index[4] = {0, 1, 2, 3};
+    int target[4] = {
+        P->Amounta,
+        P->Amountb,
+        P->Amountc,
+        P->Amountd
+    };
+    int sum = 0;
+    //ÅÅĞò:Ã°ÅİÅÅĞòµÃÁË
+    for (int i = 0; i < 4; i++)
+    {   
+        sum += target[i];
+        for (int j = 0; j < 4 - i - 1; j++)
+        {
+            if (target[j] < target[j + 1])
+            {
+                int temp = target[j];
+                target[j] = target[j + 1];
+                target[j + 1] = temp;
+
+                int temp_index = index[j];
+                index[j] = index[j + 1];
+                index[j + 1] = temp_index;
+            }
+        }
+    }
+
+    for (int i = 0; i < 4; i++)
+    {
+        printf("Ô±¹¤%lld:", Wlist[index[i]]);
+        printf("%d\n", target[i]);
+    }
+    printf("×Ü¼Æ£º%d\n",sum);
+    system("pause");
+}
+
+void Wprint(Worker_Statistics *W,long long *Plist)
+{
+    printf("Ô±¹¤¹¤ºÅ£º%lld\n", W->WorkerNumber);
+    int index[5] = {0,1,2,3,4};
+    int target[5] = {
+        W->Amount1,
+        W->Amount2,
+        W->Amount3,
+        W->Amount4,
+        W->Amount5
+    };
+    int sum = 0; 
+    for (int i = 0 ; i < 5 ; i++){
+        sum += target[i];
+        for (int j = 0 ; j < 5 -1- i ; j ++){
+            if (target[j] < target[j+1]){
+                int temp = target[j];
+                target[j] = target[j+1];
+                target[j+1] = temp;
+
+                int temp_index = index[j];
+                index[j] = index[j+1];
+                index[j+1] = temp_index;
+            }
+        }
+    }
+
+    for (int i = 0 ;i <5; i ++){
+        printf("²úÆ·%lld:",Plist[index[i]]);
+        printf("%d\n",target[i]);
+    }
+    printf("×Ü¼Æ£º%d\n",sum);
+    system("pause");
 }
