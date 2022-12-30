@@ -5,14 +5,15 @@
 //宏定义产品的长度
 // 定义结构体,员工导向
 int status = 0;
-void menu(int, int, long long *, long long *, Workers *);
+void menu(int, int, long long *, long long *, Workers *,int *);
 void main()
 {
-    long long *ProductNumber = setting();                      //读取产品的编号
+    long long *ProductNumber = setting();                      //读取产品的编号和
+    int *Price = Pricesetting();                               //价钱
     long long *WorkersNumber = wsetting();                     //读取员工编号
     Workers *head = creating(4, ProductNumber, WorkersNumber); //不保留输入人数接口
     int n = 0;
-    menu(n, 0, ProductNumber, WorkersNumber, head);
+    menu(n, 0, ProductNumber, WorkersNumber, head,Price);
     while (1)
     {
         if (kbhit())
@@ -24,7 +25,7 @@ void main()
                 if (n < 0)
                     n = 6;
                 system("cls");
-                menu(n, 0, ProductNumber, WorkersNumber, head);
+                menu(n, 0, ProductNumber, WorkersNumber, head,Price);
             }
             if (GetAsyncKeyState(VK_DOWN))
             {
@@ -32,18 +33,18 @@ void main()
                 if (n > 6)
                     n = 0;
                 system("cls");
-                menu(n, 0, ProductNumber, WorkersNumber, head);
+                menu(n, 0, ProductNumber, WorkersNumber, head,Price);
             }
             if (GetAsyncKeyState(VK_RETURN) & 0x8000)
             {
                 system("cls");
-                menu(n, 1, ProductNumber, WorkersNumber, head);
+                menu(n, 1, ProductNumber, WorkersNumber, head,Price);
                 if (status == 1)
                     break;
                 else
                 {
                     system("cls");
-                    menu(n, 0, ProductNumber, WorkersNumber, head);
+                    menu(n, 0, ProductNumber, WorkersNumber, head,Price);
                 }
             }
             Sleep(100);
@@ -51,7 +52,7 @@ void main()
     }
 }
 
-void menu(int n, int flag, long long *ProductNumber, long long *WorkersNumber, Workers *head)
+void menu(int n, int flag, long long *ProductNumber, long long *WorkersNumber, Workers *head,int *Price)
 { //高亮位置
     switch (n)
     {
@@ -122,7 +123,7 @@ void menu(int n, int flag, long long *ProductNumber, long long *WorkersNumber, W
             scanf("%d", &period);
             WS = Wstatistic(wNumber, period); //按员工统计*
             //打印的函数
-            Wprint(WS,ProductNumber);
+            Wprint(WS, ProductNumber,Price);
             system("pause");
         }
         break;
@@ -165,7 +166,7 @@ void menu(int n, int flag, long long *ProductNumber, long long *WorkersNumber, W
             scanf("%d", &period);
             PS = Pstatistic(pNumber, period, ProductNumber); // 按产品统计 *
             //打印的参数
-            Pprint(PS,WorkersNumber);
+            Pprint(PS, WorkersNumber);
             system("pause");
         }
         break;
@@ -202,9 +203,9 @@ void menu(int n, int flag, long long *ProductNumber, long long *WorkersNumber, W
         printf("\n==============================\n");
         if (flag == 1)
         {
-            rwsetting();
+            WorkersNumber = rwsetting();
         }
-            break;
+        break;
     case 5:
         printf("\n=============菜单=============");
         printf("\n            写纸条            ");
@@ -219,9 +220,9 @@ void menu(int n, int flag, long long *ProductNumber, long long *WorkersNumber, W
         printf("\n==============================\n");
         if (flag == 1)
         {
-            resetting();
+            ProductNumber = resetting();
         }
-            break;
+        break;
     case 6:
         printf("\n=============菜单=============");
         printf("\n            写纸条            ");
@@ -242,4 +243,3 @@ void menu(int n, int flag, long long *ProductNumber, long long *WorkersNumber, W
         break;
     }
 }
-

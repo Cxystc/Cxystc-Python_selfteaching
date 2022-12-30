@@ -389,7 +389,7 @@ void Pprint(Product_Statistics *P, long long *Wlist)
     system("pause");
 }
 
-void Wprint(Worker_Statistics *W,long long *Plist)
+void Wprint(Worker_Statistics *W,long long *Plist,int *Price)
 {
     printf("员工工号：%lld\n", W->WorkerNumber);
     int index[5] = {0,1,2,3,4};
@@ -402,7 +402,7 @@ void Wprint(Worker_Statistics *W,long long *Plist)
     };
     int sum = 0; 
     for (int i = 0 ; i < 5 ; i++){
-        sum += target[i];
+        sum += target[i]*Price[i];
         for (int j = 0 ; j < 5 -1- i ; j ++){
             if (target[j] < target[j+1]){
                 int temp = target[j];
@@ -418,8 +418,10 @@ void Wprint(Worker_Statistics *W,long long *Plist)
 
     for (int i = 0 ;i <5; i ++){
         printf("产品%lld:",Plist[index[i]]);
-        printf("%d\n",target[i]);
+        printf("%d",target[i]*Price[index[i]]);
+        printf("￥\n");
     }
-    printf("总计：%d\n",sum);
+    printf("总计：%d",sum);
+    printf("￥\n");
     system("pause");
 }

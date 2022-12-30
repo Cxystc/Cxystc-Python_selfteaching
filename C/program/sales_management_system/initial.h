@@ -1,5 +1,5 @@
-#ifndef _INITIAL_H_//å¦‚æœæ²¡æœ‰å®šä¹‰
-#define _INITIAL_H_//åˆ™æ‰§è¡Œä¸‹é¢çš„ä»£ç 
+#ifndef _INITIAL_H_//Èç¹ûÃ»ÓĞ¶¨Òå
+#define _INITIAL_H_//ÔòÖ´ĞĞÏÂÃæµÄ´úÂë
 
 typedef struct W {
     long long int Number ;
@@ -14,24 +14,24 @@ typedef struct W {
     int Amount4 ;
     int Amount5 ;
     struct W *Next ;
-} Workers ;//é“¾è¡¨ï¼Œå‚¨å­˜4ä¸ªé”€å”®å‘˜ï¼›
+} Workers ;//Á´±í£¬´¢´æ4¸öÏúÊÛÔ±£»
 
-//ä¸‹é¢æ˜¯å‚¨å­˜æŸ¥è¯¢å¯¹åº”å•†å“çš„é”€å”®é¢çš„ç»“æ„ä½“ï¼›
+//ÏÂÃæÊÇ´¢´æ²éÑ¯¶ÔÓ¦ÉÌÆ·µÄÏúÊÛ¶îµÄ½á¹¹Ìå£»
 typedef struct A{
     long long ProductNumber ; 
     int Amounta;
     int Amountb;
     int Amountc;
-    int Amountd;//ä¸€å…±æ˜¯å››ä¸ªå‘˜å·¥
+    int Amountd;//Ò»¹²ÊÇËÄ¸öÔ±¹¤
 }Product_Statistics;
 
-//ä¸‹é¢æ˜¯å‚¨å­˜æŸ¥è¯¢å¯¹åº”å‘˜å·¥çš„é”€å”®é¢çš„ç»“æ„ä½“
+//ÏÂÃæÊÇ´¢´æ²éÑ¯¶ÔÓ¦Ô±¹¤µÄÏúÊÛ¶îµÄ½á¹¹Ìå
 typedef struct B{
     long long WorkerNumber; 
     int Amount1;
     int Amount2;
     int Amount3;
     int Amount4;
-    int Amount5;//ä¸€å…±æ˜¯äº”ç§äº§å“
+    int Amount5;//Ò»¹²ÊÇÎåÖÖ²úÆ·
 }Worker_Statistics;
 #endif

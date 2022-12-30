@@ -73,6 +73,7 @@ long long *setting()
             memset(buffer, 0, sizeof(char) * 50);
             fgets(buffer, 50, f);
         }
+        fclose(f);
         return ProductNumber;
     }
 }
@@ -129,6 +130,7 @@ long long *wsetting()
             memset(buffer, 0, sizeof(char) * 50);
             fgets(buffer, 50, f);
         }
+        fclose(f);
         return WorkersNumber;
     }
 }
@@ -154,4 +156,41 @@ long long *rwsetting()
     printf("修改成功！\n");
     system("pause");
     return WorkersNumber;
+}
+
+int Price[5];
+int *Pricesetting()
+{
+    FILE *f = fopen("./Price.txt", "a+");
+    char *buffer;
+    buffer = (char *)malloc(sizeof(char) * 10);
+    memset(buffer, 0, sizeof(char) * 10);
+    fgets(buffer, 50, f);
+
+    if (buffer[0] == '\0')
+    {
+        printf("首次使用请依次输入产品价格：\n");
+        for(int i= 0 ; i< 5; i++)
+        {
+            int price;
+            scanf("%d", &price);
+            Price[i] = price;
+            fputs(itoa(price,buffer,10),f);
+            fputc('\n',f);
+        }
+        fclose(f);
+        printf("保存成功！\n");
+        system("pause");
+        return Price;
+    }
+    
+    else{
+        for(int i= 0 ; i < 5;i++){
+            Price[i] = atoi(buffer);
+            memset(buffer,0,sizeof(buffer));
+            fgets(buffer,50,f);
+        }
+        fclose(f);
+        return Price;
+    }
 }
