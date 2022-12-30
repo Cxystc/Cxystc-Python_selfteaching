@@ -124,7 +124,6 @@ void menu(int n, int flag, long long *ProductNumber, long long *WorkersNumber, W
             WS = Wstatistic(wNumber, period); //按员工统计*
             //打印的函数
             Wprint(WS, ProductNumber,Price);
-            system("pause");
         }
         break;
     case 2:
@@ -167,7 +166,6 @@ void menu(int n, int flag, long long *ProductNumber, long long *WorkersNumber, W
             PS = Pstatistic(pNumber, period, ProductNumber); // 按产品统计 *
             //打印的参数
             Pprint(PS, WorkersNumber);
-            system("pause");
         }
         break;
     case 3:

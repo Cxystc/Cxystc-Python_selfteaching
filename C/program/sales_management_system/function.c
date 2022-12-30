@@ -140,12 +140,11 @@ void infile(Workers *head, char *filename) //一口气直接，全部pull进去
 
 char *getfilepath(char *filename)
 { //修改数据存储地址也在这里,这个函数最后得到一个文件的绝对路径
-    FILE *file;
-    file = fopen("./setting.txt", "a+");
+    FILE *file = fopen("./setting.txt", "a+");
     char *buffer;
     buffer = (char *)malloc(sizeof(char) * 500);
     memset(buffer, 0, 500);
-    buffer = fgets(buffer, 128, file);
+    fgets(buffer, 128, file);
     if (buffer[0] == '\0')
     {
         char path[128] = {0};
@@ -153,13 +152,14 @@ char *getfilepath(char *filename)
         scanf("%s", path);
         fwrite(path, sizeof(char), strlen(path), file);
         fclose(file);
-        getfilepath(filename);
+        return getfilepath(filename);
     }
     else
     {
         buffer = strcat(buffer, "/");
         buffer = strcat(buffer, filename);
         buffer = strcat(buffer, ".txt");
+        fclose(file);
         return buffer;
     }
 }
