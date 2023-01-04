@@ -12,7 +12,6 @@ Workers *creating(int Workers_amount, long long *ProductNumber, long long *Worke
     for (int i = 0; i < Workers_amount; i++)
     {
         memset(p, 0, sizeof(Workers));
-        // 随便写点工号 //后期可修改
         p->Product1 = ProductNumber[0];
         p->Product2 = ProductNumber[1];
         p->Product3 = ProductNumber[2];
@@ -49,7 +48,7 @@ Workers *creating(int Workers_amount, long long *ProductNumber, long long *Worke
     return head;
 }
 
-Workers *input(Workers *head, long long *ProductNumber)
+Workers *input(Workers *head, long long *ProductNumber) 
 {
     long long workers;
     printf("请输入员工的工号: \n");
@@ -358,12 +357,11 @@ void Pprint(Product_Statistics *P, long long *Wlist)
         P->Amounta,
         P->Amountb,
         P->Amountc,
-        P->Amountd
-    };
+        P->Amountd};
     int sum = 0;
     //排序:冒泡排序得了
     for (int i = 0; i < 4; i++)
-    {   
+    {
         sum += target[i];
         for (int j = 0; j < 4 - i - 1; j++)
         {
@@ -380,48 +378,96 @@ void Pprint(Product_Statistics *P, long long *Wlist)
         }
     }
 
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 4; i++) //打印
     {
         printf("员工%lld:", Wlist[index[i]]);
         printf("%d\n", target[i]);
     }
-    printf("总计：%d\n",sum);
+    printf("总计：%d\n", sum);
+
+    char filename[50]; //保存
+    strcpy(filename, "Pstastic");
+
+    char *change;
+    change = (char *)malloc(sizeof(char)*50);
+    lltoa(P->ProductNumber,change,10);
+    strcat(filename,change);
+    strcat(filename,"_");
+
+    time_t timep;
+    time(&timep);
+    char *date = getdate(timep);
+    strcat(filename, date);
+    char *filepath = getfilepath(filename);
+    FILE *file = fopen(filepath, "w+");
+    for (int i = 0; i < 4; i++)
+    {
+        fprintf(file, "Worker%lld: ", Wlist[index[i]]);
+        fprintf(file, "%d Pieces", target[i]);
+        fprintf(file, "\n");
+    }
+    fclose(file);
     system("pause");
 }
 
-void Wprint(Worker_Statistics *W,long long *Plist,int *Price)
+void Wprint(Worker_Statistics *W, long long *Plist, int *Price)
 {
     printf("员工工号：%lld\n", W->WorkerNumber);
-    int index[5] = {0,1,2,3,4};
+    int index[5] = {0, 1, 2, 3, 4};
     int target[5] = {
         W->Amount1,
         W->Amount2,
         W->Amount3,
         W->Amount4,
-        W->Amount5
-    };
-    int sum = 0; 
-    for (int i = 0 ; i < 5 ; i++){
-        sum += target[i]*Price[i];
-        for (int j = 0 ; j < 5 -1- i ; j ++){
-            if (target[j] < target[j+1]){
+        W->Amount5};
+    int sum = 0;
+    for (int i = 0; i < 5; i++)
+    {
+        sum += target[i] * Price[i];
+        for (int j = 0; j < 5 - 1 - i; j++)
+        {
+            if (target[j] < target[j + 1])
+            {
                 int temp = target[j];
-                target[j] = target[j+1];
-                target[j+1] = temp;
+                target[j] = target[j + 1];
+                target[j + 1] = temp;
 
                 int temp_index = index[j];
-                index[j] = index[j+1];
-                index[j+1] = temp_index;
+                index[j] = index[j + 1];
+                index[j + 1] = temp_index;
             }
         }
     }
 
-    for (int i = 0 ;i <5; i ++){
-        printf("产品%lld:",Plist[index[i]]);
-        printf("%d",target[i]*Price[index[i]]);
+    for (int i = 0; i < 5; i++) //打印
+    {
+        printf("产品%lld:", Plist[index[i]]);
+        printf("%d", target[i] * Price[index[i]]);
         printf("￥\n");
     }
-    printf("总计：%d",sum);
+    printf("总计：%d", sum);
     printf("￥\n");
+
+    char filename[50]; //保存
+    strcpy(filename, "Wstastic");
+
+    char *change;
+    change = (char*)malloc(sizeof(char) * 50);
+    lltoa(W->WorkerNumber,change,10);
+    strcat(filename,change);
+    strcat(filename,"_");
+    time_t timep;
+    time(&timep);
+    char *date = getdate(timep);
+    strcat(filename, date);
+    char *filepath = getfilepath(filename);
+    FILE *file = fopen(filepath, "w+");
+    for (int i = 0; i < 5; i++)
+    {
+        fprintf(file, "Product%lld: ", Plist[index[i]]);
+        fprintf(file, "%d Yuan", target[i] * Price[index[i]]);
+        fprintf(file, "\n");
+    }
+    fclose(file);
     system("pause");
 }

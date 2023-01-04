@@ -2,8 +2,6 @@
 #include "allinclude.h"
 #include "function.h"
 #include "setting.h"
-//宏定义产品的长度
-// 定义结构体,员工导向
 int status = 0;
 void menu(int, int, long long *, long long *, Workers *,int *);
 void main()

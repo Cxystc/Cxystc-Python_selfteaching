@@ -15,7 +15,7 @@
             },
             "args": [
                 "-g",
-                "${fileDirname}\\*.c",
+                "${file}",
                 "-o",
                 "D:/My_code/Cxystc-Python_selfteaching-1/C/exe/${fileBasenameNoExtension}.exe"
             ],
